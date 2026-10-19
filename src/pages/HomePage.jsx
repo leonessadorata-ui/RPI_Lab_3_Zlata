@@ -1,4 +1,6 @@
-function HomePage({ onNavigate }) {
+import { Link } from 'react-router-dom';
+
+function HomePage() { // Убрали onNavigate из пропсов
   return (
     <div style={{ backgroundColor: '#f0f4f8', minHeight: '80vh' }}>
 
@@ -38,9 +40,12 @@ function HomePage({ onNavigate }) {
           }}>
             Наши лекторы — признанные специалисты в своих областях, готовые делиться опытом и знаниями.
           </h1>
-          <button
-            onClick={() => onNavigate('lecturers')}
+
+
+          <Link
+            to="/lecturers"
             style={{
+              display: 'inline-block',
               background: 'linear-gradient(90deg, #9ac1eb 0%, #b3d0f2 100%)',
               color: 'white',
               border: 'none',
@@ -49,10 +54,12 @@ function HomePage({ onNavigate }) {
               borderRadius: '50px',
               cursor: 'pointer',
               fontWeight: 'bold',
-              boxShadow: '0 8px 20px rgba(154, 193, 235, 0.5)'
+              boxShadow: '0 8px 20px rgba(154, 193, 235, 0.5)',
+              textDecoration: 'none',
+              textAlign: 'center'
             }}>
             НАЙТИ ЛЕКТОРА
-          </button>
+          </Link>
         </div>
 
       </div>
@@ -117,11 +124,25 @@ function HomePage({ onNavigate }) {
         <p style={{ fontSize: '18px', marginBottom: '30px', maxWidth: '600px', margin: '0 auto 30px auto' }}>
           Присоединяйтесь к платформе и делитесь знаниями.
         </p>
-        <button
-          onClick={() => onNavigate('contacts')}
-          style={{ backgroundColor: 'white', color: '#1a73e8', border: 'none', padding: '15px 40px', fontSize: '18px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold' }}>
+
+
+        <Link
+          to="/contacts"
+          style={{
+            display: 'inline-block',
+            backgroundColor: 'white',
+            color: '#1a73e8',
+            border: 'none',
+            padding: '15px 40px',
+            fontSize: '18px',
+            borderRadius: '50px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            textDecoration: 'none',
+            textAlign: 'center'
+          }}>
           СТАТЬ ЛЕКТОРОМ
-        </button>
+        </Link>
       </div>
 
     </div>

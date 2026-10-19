@@ -1,34 +1,39 @@
-import React, { useState } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+
+// Импортируем все твои страницы
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import PartnersPage from './pages/PartnersPage';
 import LecturersPage from './pages/LecturersPage';
-import ReviewsPage from './pages/ReviewsPage';
+import LecturerDetailPage from './pages/LecturerDetailPage'; // Её нужно создать (см. ЭТАП 2)
+import AboutPage from './pages/AboutPage';
 import BlogPage from './pages/BlogPage';
 import ContactsPage from './pages/ContactsPage';
+import PartnersPage from './pages/PartnersPage';
+import ReviewsPage from './pages/ReviewsPage';
+import NotFound from './pages/NotFound'; // Её нужно создать (см. ЭТАП 3)
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-
-  const renderPage = () => {
-    if (currentPage === 'home') return <HomePage onNavigate={setCurrentPage} />;
-    if (currentPage === 'about') return <AboutPage />;
-    if (currentPage === 'partners') return <PartnersPage />;
-    if (currentPage === 'lecturers') return <LecturersPage />;
-    if (currentPage === 'reviews') return <ReviewsPage />;
-    if (currentPage === 'blog') return <BlogPage />;
-    if (currentPage === 'contacts') return <ContactsPage />;
-    return <HomePage onNavigate={setCurrentPage} />;
-  };
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header onNavigate={setCurrentPage} />
-      <main style={{ flex: 1 }}>{renderPage()}</main>
-      <Footer />
-    </div>
+    <Routes>
+      {/* Layout оборачивает все страницы, чтобы шапка и подвал были везде */}
+      <Route path="/" element={<Layout />}>
+
+        {/* Главная */}
+        <Route index element={<HomePage />} />
+
+        {/* Остальные страницы */}
+        <Route path="lecturers" element={<LecturersPage />} />
+        <Route path="lecturers/:id" element={<LecturerDetailPage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="blog" element={<BlogPage />} />
+        <Route path="contacts" element={<ContactsPage />} />
+        <Route path="partners" element={<PartnersPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

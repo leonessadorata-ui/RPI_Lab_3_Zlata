@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { lecturers } from '../data/lecturers';
 import LecturerCard from '../components/LecturerCard';
-import LecturerModal from '../components/LecturerModal';
 
 function LecturersPage() {
-  const [selectedLecturer, setSelectedLecturer] = useState(null);
   const [filter, setFilter] = useState('all');
 
   const allDisciplines = ['all', ...new Set(lecturers.flatMap(l => l.disciplines.map(d => d.title)))];
@@ -17,6 +15,7 @@ function LecturersPage() {
     <div style={{ padding: '40px 20px', backgroundColor: '#f0f4f8', minHeight: '80vh' }}>
       <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '32px', color: '#2c3e50' }}>Наши лекторы</h2>
 
+      {/* Блок с кнопками фильтров */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center', marginBottom: '40px', maxWidth: '1000px', margin: '0 auto 40px auto' }}>
         {allDisciplines.map((disc, index) => (
           <button
@@ -39,22 +38,15 @@ function LecturersPage() {
         ))}
       </div>
 
+      {/* Вывод карточек */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '25px', justifyContent: 'center' }}>
         {filteredLecturers.map((lecturer) => (
           <LecturerCard
             key={lecturer.id}
             lecturer={lecturer}
-            onShowDetails={setSelectedLecturer}
           />
         ))}
       </div>
-
-      {selectedLecturer && (
-        <LecturerModal
-          lecturer={selectedLecturer}
-          onClose={() => setSelectedLecturer(null)}
-        />
-      )}
     </div>
   );
 }
